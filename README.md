@@ -48,6 +48,28 @@ be published directly as a CI artifact or static site. Use `--offline` when the
 required Maven dependencies are already available in the local repository, or
 `--maven-settings` to select a Maven/Nexus configuration.
 
+### Push APIs to YApi
+
+Headless export also supports the original YApi upload workflow, including module
+tokens, category resolution, mock rules, and update handling:
+
+```bash
+EASYYAPI_YAPI_SERVER="https://yapi.example.com" \
+EASYYAPI_YAPI_TOKEN="your-token" \
+build/standalone/easyyapi/bin/easyyapi \
+  --project /absolute/path/to/project \
+  --jdk /absolute/path/to/jdk \
+  --channel yapi \
+  --mode export \
+  --output /absolute/path/to/yapi-result.json
+```
+
+The command can instead import the read-only Yapi settings from an existing IDEA
+configuration with `--idea-config`. Environment variables take precedence over
+imported settings. Configure Yapi's export mode as `ALWAYS_UPDATE` or `CREATE_NEW`;
+the interactive `ALWAYS_ASK` mode is not available in Headless execution. The output
+file contains the upload result JSON rather than an API document.
+
 For the complete CLI options, YApi settings import, container usage, and smoke test,
 see [`docs/developer/standalone.md`](docs/developer/standalone.md).
 

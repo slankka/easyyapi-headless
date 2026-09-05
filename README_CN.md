@@ -47,6 +47,27 @@ build/standalone/easyyapi/bin/easyyapi \
 如果本地 Maven 仓库已有所需依赖，可使用 `--offline`；也可以通过
 `--maven-settings` 指定 Maven/Nexus 配置。
 
+### 推送 API 到 YApi
+
+Headless 导出同样支持原有的 YApi 推送流程，包括模块 Token、分类解析、Mock
+规则和更新处理：
+
+```bash
+EASYYAPI_YAPI_SERVER="https://yapi.example.com" \
+EASYYAPI_YAPI_TOKEN="your-token" \
+build/standalone/easyyapi/bin/easyyapi \
+  --project /absolute/path/to/project \
+  --jdk /absolute/path/to/jdk \
+  --channel yapi \
+  --mode export \
+  --output /absolute/path/to/yapi-result.json
+```
+
+也可以通过 `--idea-config` 从现有 IDEA 配置中只读导入 Yapi 设置。环境变量的
+优先级高于导入的设置。Yapi 导出模式应配置为 `ALWAYS_UPDATE` 或 `CREATE_NEW`；
+交互式的 `ALWAYS_ASK` 模式不支持 Headless 执行。输出文件保存的是推送结果 JSON，
+而不是 API 文档。
+
 完整 CLI 参数、YApi 设置导入、容器使用方式和 Smoke Test 请参阅
 [`docs/developer/standalone.md`](docs/developer/standalone.md)。
 
