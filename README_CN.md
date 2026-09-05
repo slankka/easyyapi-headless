@@ -13,6 +13,43 @@
 
 一个用于 API 开发的 IntelliJ IDEA 插件 —— 将 API 文档导出至 YApi/Postman/Markdown，发送请求，直接在代码中管理接口。
 
+## Headless 模式
+
+EasyYapi 同时提供面向容器和 CI/CD 流水线的 Headless CLI。它复用现有的
+PSI、Maven、Spring MVC、规则和导出能力，无需打开 IDEA 窗口即可运行。当前
+主要支持 Java + Maven + Spring MVC，并支持 YApi、OpenAPI 导出以及自包含的
+静态 API Preview。
+
+项目按以下三个边界拆分：
+
+| 模块 | 职责 |
+|------|------|
+| `headless-core` | 共享 API 模型、导出/规则契约、PSI/类型基础设施和 Preview 模型 |
+| `headless-cli` | IntelliJ Headless 启动、Maven 项目加载、导出命令和静态 Preview 渲染 |
+| `idea-plugin` | IDEA Settings、API 仪表盘、Actions，以及 IDE 和 Headless 流程共用的实现适配 |
+
+### 构建并运行 Headless CLI
+
+```bash
+# 构建 Standalone 分发包
+./gradlew packageStandalone
+
+# 为 Maven 多模块项目生成全部 API 的 Preview
+build/standalone/easyyapi/bin/easyyapi \
+  --project /absolute/path/to/project \
+  --jdk /absolute/path/to/jdk \
+  --mode preview \
+  --output /absolute/path/to/preview
+```
+
+生成的 Preview 是一个静态 `index.html`，支持层级 API 导航、按接口名称、HTTP
+方法或 URL 搜索，以及请求/响应示例。它可以直接作为 CI 构建产物或静态站点发布。
+如果本地 Maven 仓库已有所需依赖，可使用 `--offline`；也可以通过
+`--maven-settings` 指定 Maven/Nexus 配置。
+
+完整 CLI 参数、YApi 设置导入、容器使用方式和 Smoke Test 请参阅
+[`docs/developer/standalone.md`](docs/developer/standalone.md)。
+
 ## 功能特性
 
 ### API 导出
