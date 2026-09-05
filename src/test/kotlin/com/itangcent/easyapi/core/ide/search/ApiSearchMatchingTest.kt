@@ -1,6 +1,7 @@
 package com.itangcent.easyapi.core.ide.search
 
 import com.itangcent.easyapi.core.export.*
+import com.itangcent.easyapi.headless.core.export.*
 import com.itangcent.easyapi.core.export.httpMetadata
 import org.junit.Assert.*
 import org.junit.Test

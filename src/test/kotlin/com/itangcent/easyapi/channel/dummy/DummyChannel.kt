@@ -4,7 +4,7 @@ import com.intellij.openapi.project.Project
 import com.itangcent.easyapi.channel.spi.Channel
 import com.itangcent.easyapi.channel.spi.ChannelOptionsPanel
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 
 /**
  * V2 extensibility stub channel.

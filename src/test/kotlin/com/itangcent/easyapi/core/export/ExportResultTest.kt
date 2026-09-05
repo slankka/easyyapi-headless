@@ -1,5 +1,7 @@
 package com.itangcent.easyapi.core.export
 
+import com.itangcent.easyapi.headless.core.export.ExportMetadata
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import org.junit.Assert.*
 import org.junit.Test
 

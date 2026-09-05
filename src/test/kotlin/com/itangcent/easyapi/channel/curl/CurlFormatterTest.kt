@@ -641,7 +641,7 @@ class CurlFormatterTest {
         val body = ObjectModel.Object(
             mapOf("name" to FieldModel(ObjectModel.single("string")))
         )
-        val extensions = com.itangcent.easyapi.core.export.MutableExtension()
+        val extensions = com.itangcent.easyapi.headless.core.export.MutableExtension()
         extensions[EndpointVariableResolver.RESOLVED_BODY_JSON_KEY] = """{"name":"alice"}"""
 
         val endpoint = ApiEndpoint(
@@ -703,7 +703,7 @@ class CurlFormatterTest {
     fun testPrettyPrintInvalidJsonFallsBackToCompact() {
         // If the body serializes to invalid JSON, prettyJson should fall back to
         // the compact string rather than throwing.
-        val extensions = com.itangcent.easyapi.core.export.MutableExtension()
+        val extensions = com.itangcent.easyapi.headless.core.export.MutableExtension()
         extensions[EndpointVariableResolver.RESOLVED_BODY_JSON_KEY] = "not valid json"
 
         val endpoint = ApiEndpoint(

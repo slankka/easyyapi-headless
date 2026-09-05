@@ -1,0 +1,13 @@
+<idea-plugin require-restart="true">
+    <id>com.itangcent.easyapi.headless-cli</id>
+    <name>EasyYapi Headless CLI</name>
+    <vendor>EasyYapi</vendor>
+    <idea-version since-build="252.0" />
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.itangcent.idea.plugin.easy-yapi</depends>
+    <depends>org.jetbrains.idea.maven</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <appStarter id="easyyapi" implementation="com.itangcent.easyapi.core.standalone.StandaloneStarter" />
+    </extensions>
+</idea-plugin>

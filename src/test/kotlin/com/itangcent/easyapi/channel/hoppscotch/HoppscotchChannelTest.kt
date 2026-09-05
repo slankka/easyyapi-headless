@@ -5,7 +5,7 @@ import com.itangcent.easyapi.channel.spi.ChannelRegistry
 import com.itangcent.easyapi.channel.hoppscotch.HoppscotchExportMetadata
 import com.itangcent.easyapi.channel.hoppscotch.model.HoppCollection
 import com.itangcent.easyapi.channel.hoppscotch.model.HoppRESTRequest
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.testFramework.EasyApiLightCodeInsightFixtureTestCase
 
 class HoppscotchChannelTest : EasyApiLightCodeInsightFixtureTestCase() {

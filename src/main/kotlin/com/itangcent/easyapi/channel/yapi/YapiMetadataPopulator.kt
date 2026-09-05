@@ -1,12 +1,12 @@
 package com.itangcent.easyapi.channel.yapi
 
 import com.itangcent.easyapi.core.export.ApiEndpoint
-import com.itangcent.easyapi.core.export.MutableExtension
+import com.itangcent.easyapi.headless.core.export.MutableExtension
 import com.itangcent.easyapi.core.rule.engine.RuleEngine
 
 /**
  * Populates YApi-specific endpoint metadata (tags, status, open) onto an
- * [ApiEndpoint]'s [com.itangcent.easyapi.core.export.Extension] carrier.
+ * [ApiEndpoint]'s [com.itangcent.easyapi.headless.core.export.Extension] carrier.
  *
  * The shared `SpringMvcClassExporter` no longer populates these (they are
  * YApi-specific); instead easy-yapi's export pipeline calls

@@ -1,7 +1,7 @@
 package com.itangcent.easyapi.channel.yapi
 
 import com.itangcent.easyapi.core.export.ApiParameter
-import com.itangcent.easyapi.core.export.MutableExtension
+import com.itangcent.easyapi.headless.core.export.MutableExtension
 import com.itangcent.easyapi.core.export.ParameterType
 import org.junit.Assert.*
 import org.junit.Test

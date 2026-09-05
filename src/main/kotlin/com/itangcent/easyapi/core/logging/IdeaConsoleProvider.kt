@@ -1,5 +1,6 @@
 package com.itangcent.easyapi.core.logging
 
+import com.itangcent.easyapi.core.internal.RuntimeMode
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
@@ -52,7 +53,8 @@ class IdeaConsoleProvider(private val project: Project) {
      * @return The [IdeaConsole] instance for this project
      */
     fun getConsole(): IdeaConsole {
-        return if (project.settings<GeneralSettings>().logLevel > LogLevel.ERROR.threshold) {
+        return if (RuntimeMode.isHeadless ||
+            project.settings<GeneralSettings>().logLevel > LogLevel.ERROR.threshold) {
             IdeaLogConsole
         } else {
             ideaConsole

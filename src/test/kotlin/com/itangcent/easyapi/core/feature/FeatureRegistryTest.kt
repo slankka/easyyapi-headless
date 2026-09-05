@@ -5,7 +5,7 @@ import com.intellij.psi.PsiClass
 import com.itangcent.easyapi.channel.spi.Channel
 import com.itangcent.easyapi.channel.spi.ChannelRegistry
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.export.recognizer.ApiClassRecognizer
 import com.itangcent.easyapi.core.export.recognizer.CompositeApiClassRecognizer
 import com.itangcent.easyapi.format.spi.FieldFormatChannel

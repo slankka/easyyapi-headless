@@ -2,6 +2,7 @@ package com.itangcent.easyapi.core.ide.dialog
 
 import com.itangcent.easyapi.channel.spi.ChannelConfig
 import com.itangcent.easyapi.core.export.*
+import com.itangcent.easyapi.headless.core.export.*
 import org.junit.Assert.*
 import org.junit.Test
 

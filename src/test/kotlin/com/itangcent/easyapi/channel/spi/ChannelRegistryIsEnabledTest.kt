@@ -2,7 +2,7 @@ package com.itangcent.easyapi.channel.spi
 
 import com.intellij.testFramework.registerServiceInstance
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.settings.DefaultSettingBinder
 import com.itangcent.easyapi.core.settings.SettingBinder
 import com.itangcent.easyapi.core.settings.module.GeneralSettings

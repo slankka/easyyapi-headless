@@ -3,7 +3,7 @@ package com.itangcent.easyapi.channel.yapi
 import com.itangcent.easyapi.channel.spi.ChannelConfig
 import com.itangcent.easyapi.channel.yapi.YapiConfig
 import com.itangcent.easyapi.core.export.HttpMethod
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.export.httpMetadata
 import com.itangcent.easyapi.testFramework.EasyApiLightCodeInsightFixtureTestCase
 import com.itangcent.easyapi.testFramework.wrap

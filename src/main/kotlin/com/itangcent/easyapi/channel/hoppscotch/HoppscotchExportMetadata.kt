@@ -1,7 +1,7 @@
 package com.itangcent.easyapi.channel.hoppscotch
 
 import com.itangcent.easyapi.channel.hoppscotch.model.HoppCollection
-import com.itangcent.easyapi.core.export.ExportMetadata
+import com.itangcent.easyapi.headless.core.export.ExportMetadata
 import com.itangcent.easyapi.core.util.text.append
 
 /**

@@ -5,7 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.itangcent.easyapi.core.export.ExportOrchestrator
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.ide.DumbModeHelper
 import com.itangcent.easyapi.core.ide.dialog.ExportDialog
 import com.itangcent.easyapi.core.ide.dialog.ExportDialogResult

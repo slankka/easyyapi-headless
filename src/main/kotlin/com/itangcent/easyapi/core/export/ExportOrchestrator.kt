@@ -10,7 +10,7 @@ import com.itangcent.easyapi.channel.spi.ChannelConfig
 import com.itangcent.easyapi.channel.spi.ChannelRegistry
 import com.itangcent.easyapi.core.export.ApiEndpoint
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.ide.support.NotificationUtils
 import com.itangcent.easyapi.core.ide.support.SelectionScope
 import com.itangcent.easyapi.core.logging.IdeaLog

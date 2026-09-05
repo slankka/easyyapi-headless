@@ -70,15 +70,15 @@ class ChannelExportAction(
             }
 
             when (result) {
-                is com.itangcent.easyapi.core.export.ExportResult.Error -> {
+                is com.itangcent.easyapi.headless.core.export.ExportResult.Error -> {
                     swing {
                         com.intellij.openapi.ui.Messages.showErrorDialog(
                             project, result.message, "Export Failed"
                         )
                     }
                 }
-                is com.itangcent.easyapi.core.export.ExportResult.Success,
-                is com.itangcent.easyapi.core.export.ExportResult.Cancelled -> {}
+                is com.itangcent.easyapi.headless.core.export.ExportResult.Success,
+                is com.itangcent.easyapi.headless.core.export.ExportResult.Cancelled -> {}
             }
         }
     }

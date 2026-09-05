@@ -1,6 +1,7 @@
 package com.itangcent.easyapi.core.dashboard
 
 import com.itangcent.easyapi.core.export.*
+import com.itangcent.easyapi.headless.core.export.*
 import com.itangcent.easyapi.testFramework.EasyApiLightCodeInsightFixtureTestCase
 import javax.swing.JTree
 import javax.swing.tree.DefaultMutableTreeNode

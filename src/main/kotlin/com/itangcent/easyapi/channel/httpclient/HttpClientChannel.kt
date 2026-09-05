@@ -13,7 +13,7 @@ import com.itangcent.easyapi.channel.spi.ChannelOptionsPanel
 import com.itangcent.easyapi.channel.httpclient.HttpClientFileFormatter
 import com.itangcent.easyapi.channel.httpclient.HttpClientExportMetadata
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.logging.IdeaLog
 
 /**

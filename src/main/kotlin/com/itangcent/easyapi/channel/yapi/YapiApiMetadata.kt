@@ -2,12 +2,12 @@ package com.itangcent.easyapi.channel.yapi
 
 import com.itangcent.easyapi.core.export.ApiEndpoint
 import com.itangcent.easyapi.core.export.ApiParameter
-import com.itangcent.easyapi.core.export.MutableExtension
+import com.itangcent.easyapi.headless.core.export.MutableExtension
 import com.itangcent.easyapi.core.psi.model.FieldModel
 
 /**
  * YApi-specific accessors for API/field metadata stored on the shared model
- * classes' [com.itangcent.easyapi.core.export.Extension] carrier.
+ * classes' [com.itangcent.easyapi.headless.core.export.Extension] carrier.
  *
  * These are Kotlin extension properties so that easy-yapi code reads
  * `endpoint.tags` / `endpoint.status` / `endpoint.open` / `fieldModel.mock` /

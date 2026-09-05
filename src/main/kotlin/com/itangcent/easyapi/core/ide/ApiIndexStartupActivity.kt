@@ -1,5 +1,6 @@
 package com.itangcent.easyapi.core.ide
 
+import com.itangcent.easyapi.core.internal.RuntimeMode
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
@@ -19,6 +20,7 @@ import kotlin.time.Duration.Companion.seconds
  */
 class ApiIndexStartupActivity : ProjectActivity {
     override suspend fun execute(project: Project) {
+        if (RuntimeMode.isHeadless) return
         if (ApplicationManager.getApplication().isUnitTestMode) return
 
         backgroundAsync {

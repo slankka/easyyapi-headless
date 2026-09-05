@@ -2,6 +2,7 @@ package com.itangcent.easyapi.integration
 
 import com.itangcent.easyapi.channel.curl.CurlFormatter
 import com.itangcent.easyapi.core.export.*
+import com.itangcent.easyapi.headless.core.export.*
 import com.itangcent.easyapi.channel.postman.PostmanFormatOptions
 import com.itangcent.easyapi.channel.postman.PostmanFormatter
 import com.itangcent.easyapi.testFramework.EasyApiLightCodeInsightFixtureTestCase

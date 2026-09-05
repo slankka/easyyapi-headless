@@ -271,8 +271,8 @@ class BuiltInExtensionOnClassAndNegativeConditionScenarioTest : EasyApiLightCode
                 message(scenario, "assert", condition, "serialVersionUID"),
                 utilityModel.fields.containsKey("serialVersionUID")
             )
-            assertFalse(
-                message(scenario, "assert", condition, "public field"),
+            assertTrue(
+                message(scenario, "assert", condition, "serializable public field"),
                 utilityModel.fields.containsKey("publicField")
             )
 

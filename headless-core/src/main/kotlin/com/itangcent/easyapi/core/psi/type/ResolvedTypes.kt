@@ -80,7 +80,7 @@ sealed class ResolvedType {
          * walks the hierarchy per-level, building a fresh context at each level.
          * This avoids the name-collision problem where different levels reuse `T`.
          */
-        internal val genericContext: GenericContext by lazy {
+        val genericContext: GenericContext by lazy {
             val map = LinkedHashMap<String, ResolvedType>()
             val params = psiClass.typeParameters
             for (i in params.indices) {
@@ -106,7 +106,7 @@ sealed class ResolvedType {
          * Returns [genericContext] if the declaring class is this class itself,
          * or walks the hierarchy via [superClasses] to find the right context.
          */
-        internal fun contextForDeclaringClass(declaringClass: PsiClass): GenericContext {
+        fun contextForDeclaringClass(declaringClass: PsiClass): GenericContext {
             val targetQN = declaringClass.qualifiedName
             if (targetQN == psiClass.qualifiedName) return genericContext
             return findContextForClass(targetQN, this) ?: genericContext
@@ -516,7 +516,7 @@ class ResolvedField(
  * @param ownerClassType The ClassType that owns the method containing this parameter
  * @param genericContext The generic context for type resolution (from the parent method)
  */
-class ResolvedParam internal constructor(
+class ResolvedParam constructor(
     val name: String,
     val psiParameter: PsiParameter,
     val ownerClassType: ResolvedType.ClassType? = null,
@@ -578,7 +578,7 @@ private fun findContextForClass(
  *
  * @param genericMap Map from type parameter names to resolved types
  */
-internal data class GenericContext(val genericMap: Map<String, ResolvedType>) {
+data class GenericContext(val genericMap: Map<String, ResolvedType>) {
     companion object {
         /**
          * An empty generic context with no type parameter bindings.
@@ -626,7 +626,7 @@ object TypeResolver : com.itangcent.easyapi.core.logging.IdeaLog {
      * context and rely on [ResolvedType.ClassType.fields] / [ResolvedType.ClassType.methods]
      * for generic resolution.
      */
-    internal fun resolve(psiType: PsiType?, context: GenericContext): ResolvedType {
+    fun resolve(psiType: PsiType?, context: GenericContext): ResolvedType {
         if (psiType == null) return ResolvedType.UnresolvedType("null")
         if (psiType is PsiPrimitiveType) return resolvePrimitive(psiType)
         return resolveNonPrimitive(psiType, context)
@@ -715,7 +715,7 @@ object TypeResolver : com.itangcent.easyapi.core.logging.IdeaLog {
      * @param context The generic context for type parameter substitution
      * @return The resolved type, or UnresolvedType if resolution fails
      */
-    internal fun resolveFromCanonicalText(
+    fun resolveFromCanonicalText(
         canonicalText: String,
         project: com.intellij.openapi.project.Project,
         context: GenericContext = GenericContext.EMPTY
@@ -734,7 +734,7 @@ object TypeResolver : com.itangcent.easyapi.core.logging.IdeaLog {
      * @param context The generic context for type parameter substitution
      * @return The resolved type, or UnresolvedType if resolution fails
      */
-    internal fun resolveFromCanonicalText(
+    fun resolveFromCanonicalText(
         canonicalText: String,
         project: com.intellij.openapi.project.Project,
         contextElement: PsiElement?,
@@ -909,7 +909,7 @@ object TypeResolver : com.itangcent.easyapi.core.logging.IdeaLog {
      * @param typeArgs The resolved type arguments
      * @return Map from type parameter names to resolved types
      */
-    internal fun resolveGenericParams(psiClass: PsiClass, typeArgs: List<ResolvedType>): Map<String, ResolvedType> {
+    fun resolveGenericParams(psiClass: PsiClass, typeArgs: List<ResolvedType>): Map<String, ResolvedType> {
         val map = LinkedHashMap<String, ResolvedType>()
 
         val params = psiClass.typeParameters
@@ -1023,7 +1023,7 @@ object TypeResolver : com.itangcent.easyapi.core.logging.IdeaLog {
      * @param context The generic context containing type parameter bindings
      * @return The fully resolved and substituted type
      */
-    internal fun resolveAndSubstitute(psiType: PsiType?, context: GenericContext): ResolvedType {
+    fun resolveAndSubstitute(psiType: PsiType?, context: GenericContext): ResolvedType {
         val resolved = resolve(psiType, context)
         return substitute(resolved, context)
     }
@@ -1035,7 +1035,7 @@ object TypeResolver : com.itangcent.easyapi.core.logging.IdeaLog {
      * @param context The generic context containing type parameter bindings
      * @return The type with parameters substituted
      */
-    internal fun substitute(type: ResolvedType, context: GenericContext): ResolvedType {
+    fun substitute(type: ResolvedType, context: GenericContext): ResolvedType {
         return when (type) {
             is ResolvedType.UnresolvedType -> {
                 context.genericMap[type.canonicalText]?.let { return it }

@@ -4,6 +4,7 @@ import com.itangcent.easyapi.channel.curl.CurlChannel
 import com.itangcent.easyapi.channel.markdown.MarkdownChannel
 import com.itangcent.easyapi.channel.postman.PostmanChannel
 import com.itangcent.easyapi.core.export.*
+import com.itangcent.easyapi.headless.core.export.*
 import org.junit.Assert.*
 import org.junit.Test
 

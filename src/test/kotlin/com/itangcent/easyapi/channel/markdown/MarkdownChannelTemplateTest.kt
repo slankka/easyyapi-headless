@@ -5,7 +5,7 @@ import com.itangcent.easyapi.channel.spi.ChannelConfig
 import com.itangcent.easyapi.channel.markdown.MarkdownExportMetadata
 import com.itangcent.easyapi.channel.markdown.template.RemoteTemplateFetcher
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.testFramework.ApiFixtures
 import com.itangcent.easyapi.testFramework.EasyApiLightCodeInsightFixtureTestCase
 import com.itangcent.easyapi.testFramework.TestConfigReader

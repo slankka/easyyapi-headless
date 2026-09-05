@@ -1,5 +1,6 @@
 package com.itangcent.easyapi.channel.yapi
 
+import com.itangcent.easyapi.core.internal.RuntimeMode
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
@@ -31,11 +32,13 @@ class DefaultYapiSettingsHelper(private val project: Project) : YapiSettingsHelp
     private val promptedModules = mutableSetOf<String>()
 
     override suspend fun resolveServerUrl(dumb: Boolean): String? {
-        val configuredServer = project.settings<YapiSettings>().yapiServer
+        val configuredServer = (if (RuntimeMode.isHeadless)
+            System.getenv("EASYYAPI_YAPI_SERVER") ?: project.settings<YapiSettings>().yapiServer
+            else project.settings<YapiSettings>().yapiServer)
             ?.let(YapiUrls::normalizeBaseUrl)
             ?.takeIf { it.isNotBlank() }
 
-        if (configuredServer != null || dumb) {
+        if (configuredServer != null || dumb || RuntimeMode.isHeadless) {
             return configuredServer
         }
 
@@ -68,6 +71,7 @@ class DefaultYapiSettingsHelper(private val project: Project) : YapiSettingsHelp
         if (token.isNullOrBlank()) return null
 
         if (validator(token)) return token
+        if (RuntimeMode.isHeadless) return null
 
         val newToken = swing {
             Messages.showInputDialog(
@@ -97,7 +101,7 @@ class DefaultYapiSettingsHelper(private val project: Project) : YapiSettingsHelp
         val tokens = parseTokens(project.settings<YapiSettings>().yapiTokens)
         tokens[module]?.takeIf { it.isNotBlank() }?.let { return it }
 
-        if (prompt && promptedModules.add(module)) {
+        if (prompt && !RuntimeMode.isHeadless && promptedModules.add(module)) {
             val token = swing {
                 Messages.showInputDialog(
                     project,

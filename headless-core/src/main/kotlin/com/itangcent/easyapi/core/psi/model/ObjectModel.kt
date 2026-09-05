@@ -1,6 +1,6 @@
 package com.itangcent.easyapi.core.psi.model
 
-import com.itangcent.easyapi.core.export.Extension
+import com.itangcent.easyapi.headless.core.export.Extension
 import com.itangcent.easyapi.core.psi.type.JsonType
 
 /**

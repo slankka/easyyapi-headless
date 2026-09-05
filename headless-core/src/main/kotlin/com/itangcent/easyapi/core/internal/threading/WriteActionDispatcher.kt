@@ -14,7 +14,7 @@ import kotlin.coroutines.CoroutineContext
  * preserve coroutine ordering guarantees, then acquires the write lock with
  * [ApplicationManager.getApplication().runWriteAction].
  */
-internal class WriteActionDispatcher : CoroutineDispatcher() {
+class WriteActionDispatcher : CoroutineDispatcher() {
 
     override fun isDispatchNeeded(context: CoroutineContext): Boolean = true
 

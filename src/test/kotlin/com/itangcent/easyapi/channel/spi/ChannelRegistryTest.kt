@@ -1,6 +1,7 @@
 package com.itangcent.easyapi.channel.spi
 
 import com.itangcent.easyapi.core.export.*
+import com.itangcent.easyapi.headless.core.export.*
 import org.junit.Assert.*
 import org.junit.Test
 

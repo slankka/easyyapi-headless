@@ -5,7 +5,12 @@ import com.intellij.psi.PsiField
 import com.intellij.psi.PsiMethod
 import com.intellij.psi.PsiParameter
 import com.intellij.testFramework.fixtures.JavaCodeInsightTestFixture
+import com.itangcent.easyapi.core.internal.threading.IdeDispatchers
+import com.itangcent.easyapi.core.internal.threading.background
+import com.itangcent.easyapi.core.psi.type.ResolvedType
 import com.itangcent.easyapi.testFramework.EasyApiLightCodeInsightFixtureTestCase
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class ScriptPsiContextsTest : EasyApiLightCodeInsightFixtureTestCase() {
 
@@ -849,6 +854,19 @@ class ScriptPsiContextsTest : EasyApiLightCodeInsightFixtureTestCase() {
 
         val context = createClassContext(classSource)
         assertEquals("class", context.contextType())
+    }
+
+    fun testTypeToStringFromBackgroundThread() = runTest {
+        val psiClass = mock<PsiClass>()
+        whenever(psiClass.qualifiedName).thenAnswer {
+            assertTrue("Qualified name should be accessed inside a read action", IdeDispatchers.isReadAccessAllowed)
+            "com.test.TestClass"
+        }
+        val typeContext = ScriptTypeContext(mock(), ResolvedType.ClassType(psiClass))
+
+        val renderedType = background { typeContext.toString() }
+
+        assertEquals("Type string should be readable from a rule background thread", "com.test.TestClass", renderedType)
     }
 
     fun testContextType_Method() {

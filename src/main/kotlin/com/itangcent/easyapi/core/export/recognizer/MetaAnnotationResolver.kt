@@ -2,6 +2,8 @@ package com.itangcent.easyapi.core.export.recognizer
 
 import com.google.common.cache.Cache
 import com.google.common.cache.CacheBuilder
+import com.google.common.util.concurrent.UncheckedExecutionException
+import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.psi.PsiClass
 import com.intellij.psi.PsiModifierListOwner
 import com.itangcent.easyapi.core.internal.threading.IdeDispatchers
@@ -113,8 +115,14 @@ object MetaAnnotationResolver {
         if (annotationClass == null) return false
         return targetAnnotations.any { target ->
             val cacheKey = "$annotationFqn->$target"
-            cache.get(cacheKey) {
-                resolveMetaAnnotation(annotationClass, target, mutableSetOf())
+            try {
+                cache.get(cacheKey) {
+                    resolveMetaAnnotation(annotationClass, target, mutableSetOf())
+                }
+            } catch (e: UncheckedExecutionException) {
+                val cause = e.cause
+                if (cause is ProcessCanceledException) throw cause
+                throw e
             }
         }
     }

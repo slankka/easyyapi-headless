@@ -1,6 +1,6 @@
 package com.itangcent.easyapi.channel.openapi
 
-import com.itangcent.easyapi.core.export.ExportMetadata
+import com.itangcent.easyapi.headless.core.export.ExportMetadata
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertSame

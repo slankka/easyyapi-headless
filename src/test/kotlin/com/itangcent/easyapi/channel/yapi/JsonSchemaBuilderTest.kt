@@ -1,6 +1,6 @@
 package com.itangcent.easyapi.channel.yapi
 
-import com.itangcent.easyapi.core.export.MutableExtension
+import com.itangcent.easyapi.headless.core.export.MutableExtension
 import com.itangcent.easyapi.core.psi.model.FieldModel
 import com.itangcent.easyapi.core.psi.model.FieldOption
 import com.itangcent.easyapi.core.psi.model.ObjectModel

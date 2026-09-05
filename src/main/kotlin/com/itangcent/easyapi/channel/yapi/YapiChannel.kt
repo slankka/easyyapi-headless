@@ -7,10 +7,12 @@ import com.intellij.openapi.project.Project
 import com.intellij.ide.BrowserUtil
 import com.itangcent.easyapi.core.internal.threading.swing
 import com.itangcent.easyapi.channel.spi.Channel
+import com.itangcent.easyapi.channel.spi.HeadlessChannel
+import com.itangcent.easyapi.channel.spi.HeadlessExport
 import com.itangcent.easyapi.channel.spi.ChannelConfig
 import com.itangcent.easyapi.channel.spi.ChannelOptionsPanel
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.channel.yapi.YapiExporter
 import com.itangcent.easyapi.channel.yapi.YapiExportMetadata
 import com.itangcent.easyapi.core.ide.support.NotificationUtils
@@ -18,7 +20,12 @@ import com.itangcent.easyapi.core.logging.IdeaLog
 import com.itangcent.easyapi.core.rule.RuleKey
 import kotlin.reflect.KClass
 
-class YapiChannel : Channel, IdeaLog {
+class YapiChannel : Channel, IdeaLog, HeadlessChannel {
+    override suspend fun exportHeadless(context: ExportContext, format: String): HeadlessExport {
+        val result = YapiExporter.getInstance(context.project).export(context, System.getenv("EASYYAPI_YAPI_TOKEN"))
+        return HeadlessExport(result)
+    }
+
 
     override val id: String = "yapi"
     override val displayName: String = "Yapi"

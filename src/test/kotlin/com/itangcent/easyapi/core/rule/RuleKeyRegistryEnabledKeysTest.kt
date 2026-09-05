@@ -2,7 +2,7 @@ package com.itangcent.easyapi.core.rule
 
 import com.itangcent.easyapi.channel.spi.Channel
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.internal.PluginInfo.PLUGIN_ID
 import com.itangcent.easyapi.core.settings.module.GeneralSettings
 import com.itangcent.easyapi.core.settings.SettingBinder

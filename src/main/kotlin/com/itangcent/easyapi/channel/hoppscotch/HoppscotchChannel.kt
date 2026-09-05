@@ -14,7 +14,7 @@ import com.itangcent.easyapi.channel.spi.ChannelOptionsPanel
 import com.itangcent.easyapi.channel.hoppscotch.model.HoppCollection
 import com.itangcent.easyapi.channel.hoppscotch.model.hoppscotchGson
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.http.HttpClientProvider
 import com.itangcent.easyapi.core.ide.support.NotificationUtils
 import com.itangcent.easyapi.core.logging.IdeaConsoleProvider

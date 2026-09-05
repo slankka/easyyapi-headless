@@ -3,7 +3,7 @@ package com.itangcent.easyapi.channel.openapi
 import com.itangcent.easyapi.channel.spi.ChannelConfig
 import com.itangcent.easyapi.core.export.ApiEndpoint
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.export.GrpcMetadata
 import com.itangcent.easyapi.core.export.GrpcStreamingType
 import com.itangcent.easyapi.core.export.HttpMethod
@@ -390,7 +390,7 @@ class OpenApiChannelTest : EasyApiLightCodeInsightFixtureTestCase() {
     fun testHandleResultReturnsFalseForForeignMetadata() = runTest {
         // When the metadata is not OpenApiExportMetadata, handleResult should
         // return false so the orchestrator can fall back to default handling.
-        val foreignMetadata = object : com.itangcent.easyapi.core.export.ExportMetadata {
+        val foreignMetadata = object : com.itangcent.easyapi.headless.core.export.ExportMetadata {
             override fun formatDisplay(): String? = "Foreign"
         }
         val success = ExportResult.Success(

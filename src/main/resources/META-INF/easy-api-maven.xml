@@ -1,2 +1,4 @@
 <idea-plugin>
+    <!-- Maven remains a runtime dependency for the shared PSI/project model.
+         The headless appStarter itself lives in the headless-cli module. -->
 </idea-plugin>

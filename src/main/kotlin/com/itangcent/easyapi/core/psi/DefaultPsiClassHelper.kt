@@ -12,8 +12,8 @@ import com.itangcent.easyapi.core.psi.DefaultPsiClassHelper.Companion.DEFAULT_MA
 import com.itangcent.easyapi.core.psi.helper.DocHelper
 import com.itangcent.easyapi.core.psi.helper.DocMetadataResolver
 import com.itangcent.easyapi.core.psi.helper.UnifiedDocHelper
-import com.itangcent.easyapi.core.export.Extension
-import com.itangcent.easyapi.core.export.MutableExtension
+import com.itangcent.easyapi.headless.core.export.Extension
+import com.itangcent.easyapi.headless.core.export.MutableExtension
 import com.itangcent.easyapi.core.psi.model.FieldModel
 import com.itangcent.easyapi.core.psi.model.FieldOption
 import com.itangcent.easyapi.core.psi.model.ObjectModel
@@ -598,8 +598,11 @@ class DefaultPsiClassHelper(private val project: Project) : PsiClassHelper {
         // Then collect this class's own declared fields
         val ownContext = buildOwnContext(psiClass, genericContext)
         for (field in psiClass.fields) {
-            if (shouldIgnoreField(field)) continue
             val name = field.name
+            if (shouldIgnoreField(field)) {
+                fieldNames.add(name)
+                continue
+            }
             if (fieldNames.add(name)) {
                 fields.add(AccessibleField(name = name, type = field.type, psi = field, declaringContext = ownContext))
             }
@@ -672,8 +675,11 @@ class DefaultPsiClassHelper(private val project: Project) : PsiClassHelper {
 
             // Collect the superclass's own declared fields with its context
             for (field in superClass.fields) {
-                if (shouldIgnoreField(field)) continue
                 val name = field.name
+                if (shouldIgnoreField(field)) {
+                    fieldNames.add(name)
+                    continue
+                }
                 if (fieldNames.add(name)) {
                     val fieldContext = buildOwnContext(superClass, superContext)
                     fields.add(AccessibleField(name = name, type = field.type, psi = field, declaringContext = fieldContext))

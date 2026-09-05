@@ -2,6 +2,7 @@ package com.itangcent.easyapi.core.export
 
 import com.itangcent.easyapi.core.psi.model.ObjectModel
 import com.itangcent.easyapi.core.psi.type.SpecialTypeHandler
+import com.itangcent.easyapi.headless.core.export.Extension
 
 /**
  * Represents a folder/group for organizing API endpoints.

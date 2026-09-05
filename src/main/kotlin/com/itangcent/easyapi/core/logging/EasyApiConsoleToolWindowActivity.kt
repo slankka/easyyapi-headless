@@ -1,5 +1,6 @@
 package com.itangcent.easyapi.core.logging
 
+import com.itangcent.easyapi.core.internal.RuntimeMode
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
 import com.intellij.openapi.wm.ToolWindowManager
@@ -23,6 +24,7 @@ import com.itangcent.easyapi.core.settings.onSettingsChanged
 class EasyApiConsoleToolWindowActivity : ProjectActivity {
 
     override suspend fun execute(project: Project) {
+        if (RuntimeMode.isHeadless) return
         updateAvailability(project)
 
         project.onSettingsChanged {

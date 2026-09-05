@@ -7,7 +7,7 @@ import com.itangcent.easyapi.core.export.ApiEndpoint
 import com.itangcent.easyapi.core.export.ApiHeader
 import com.itangcent.easyapi.core.export.HttpMetadata
 import com.itangcent.easyapi.core.export.HttpMethod
-import com.itangcent.easyapi.core.export.MutableExtension
+import com.itangcent.easyapi.headless.core.export.MutableExtension
 import com.itangcent.easyapi.core.logging.IdeaConsoleProvider
 import com.itangcent.easyapi.core.logging.IdeaLog
 import com.itangcent.easyapi.format.json.ObjectModelJsonConverter

@@ -1,7 +1,7 @@
 package com.itangcent.easyapi.channel.openapi
 
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.extension.BuiltInExtensionExecutionHarness
 import com.itangcent.easyapi.core.extension.BuiltInExtensionScenarioLedger
 import com.itangcent.easyapi.core.extension.ExtensionConfigRegistry

@@ -1,7 +1,13 @@
 package com.itangcent.easyapi.core.export.recognizer
 
+import com.intellij.openapi.progress.ProcessCanceledException
+import com.intellij.psi.PsiAnnotation
+import com.intellij.psi.PsiClass
+import com.intellij.psi.PsiModifierListOwner
 import com.itangcent.easyapi.testFramework.EasyApiLightCodeInsightFixtureTestCase
 import org.junit.Assert.*
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class MetaAnnotationResolverTest : EasyApiLightCodeInsightFixtureTestCase() {
 
@@ -164,5 +170,26 @@ class MetaAnnotationResolverTest : EasyApiLightCodeInsightFixtureTestCase() {
             "Should not find non-existent annotation",
             hasAnnotation
         )
+    }
+
+    fun testProcessCanceledExceptionFromCacheLoaderIsRethrown() {
+        val nestedAnnotation = mock<PsiAnnotation>()
+        whenever(nestedAnnotation.qualifiedName).thenReturn("com.example.NestedAnnotation")
+        whenever(nestedAnnotation.resolveAnnotationType()).thenThrow(ProcessCanceledException())
+        val annotationClass = mock<PsiClass>()
+        whenever(annotationClass.qualifiedName).thenReturn("com.example.CancelledAnnotation")
+        whenever(annotationClass.annotations).thenReturn(arrayOf(nestedAnnotation))
+        val annotation = mock<PsiAnnotation>()
+        whenever(annotation.qualifiedName).thenReturn("com.example.CancelledAnnotation")
+        whenever(annotation.resolveAnnotationType()).thenReturn(annotationClass)
+        val element = mock<PsiModifierListOwner>()
+        whenever(element.annotations).thenReturn(arrayOf(annotation))
+
+        assertThrows(ProcessCanceledException::class.java) {
+            MetaAnnotationResolver.hasMetaAnnotationSync(
+                element,
+                setOf("com.example.TargetAnnotation")
+            )
+        }
     }
 }

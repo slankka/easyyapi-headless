@@ -7,6 +7,7 @@ import com.intellij.psi.PsiParameter
 import com.itangcent.easyapi.core.internal.threading.IdeDispatchers
 import com.itangcent.easyapi.core.internal.threading.read
 import com.itangcent.easyapi.core.export.*
+import com.itangcent.easyapi.headless.core.export.*
 import com.itangcent.easyapi.core.logging.IdeaLog
 import com.itangcent.easyapi.core.psi.helper.DocMetadataResolver
 import com.itangcent.easyapi.core.psi.model.ObjectModel

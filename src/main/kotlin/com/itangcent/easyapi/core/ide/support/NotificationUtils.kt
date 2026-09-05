@@ -1,5 +1,6 @@
 package com.itangcent.easyapi.core.ide.support
 
+import com.itangcent.easyapi.core.internal.RuntimeMode
 import com.intellij.notification.Notification
 import com.intellij.notification.NotificationType
 import com.intellij.notification.Notifications
@@ -90,6 +91,8 @@ object NotificationUtils : IdeaLog {
     }
 
     private fun notify(notification: Notification, project: Project?) {
-        Notifications.Bus.notify(notification, project)
+        if (!RuntimeMode.isHeadless) {
+            Notifications.Bus.notify(notification, project)
+        }
     }
 }

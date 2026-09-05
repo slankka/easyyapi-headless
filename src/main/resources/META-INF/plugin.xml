@@ -10,10 +10,10 @@
     <idea-version since-build="252.0"/>
     <depends>com.intellij.modules.platform</depends>
 
+    <depends optional="true" config-file="easy-api-maven.xml">org.jetbrains.idea.maven</depends>
     <depends optional="true" config-file="easy-api-kotlin.xml">org.jetbrains.kotlin</depends>
     <depends optional="true" config-file="easy-api-scala.xml">org.intellij.scala</depends>
     <depends optional="true" config-file="easy-api-groovy.xml">org.intellij.groovy</depends>
-    <depends optional="true" config-file="easy-api-maven.xml">org.jetbrains.idea.maven</depends>
     <depends optional="true" config-file="easy-api-gradle.xml">org.jetbrains.plugins.gradle</depends>
 
     <extensions defaultExtensionNs="org.jetbrains.kotlin">
@@ -30,11 +30,13 @@
              no longer hard-imports framework.<id>.* recognizer classes (DAG rule). -->
         <extensionPoint name="apiClassRecognizer" interface="com.itangcent.easyapi.core.export.recognizer.ApiClassRecognizer" area="IDEA_PROJECT" dynamic="true"/>
         <extensionPoint name="featureContributor" interface="com.itangcent.easyapi.core.feature.FeatureContributor" area="IDEA_PROJECT" dynamic="true"/>
+        <extensionPoint name="headlessRuntimeProvider" interface="com.itangcent.easyapi.headless.core.runtime.HeadlessRuntimeProvider" area="IDEA_PROJECT" dynamic="true"/>
     </extensionPoints>
 
     <extensions defaultExtensionNs="com.itangcent.idea.plugin.easy-yapi">
         <featureContributor implementation="com.itangcent.easyapi.core.feature.CoreFeatureContributor"/>
         <featureContributor implementation="com.itangcent.easyapi.core.feature.LegacyFeatureContributor"/>
+        <headlessRuntimeProvider implementation="com.itangcent.easyapi.core.headless.IdeaHeadlessRuntimeProvider"/>
         <classExporter implementation="com.itangcent.easyapi.framework.springmvc.SpringMvcClassExporter"/>
         <classExporter implementation="com.itangcent.easyapi.framework.feign.FeignClassExporter"/>
         <classExporter implementation="com.itangcent.easyapi.framework.jaxrs.JaxRsClassExporter"/>
@@ -104,6 +106,7 @@
 
         <projectService serviceImplementation="com.itangcent.easyapi.core.export.EndpointBuilder"/>
         <projectService serviceImplementation="com.itangcent.easyapi.core.export.ClassExporterRegistry"/>
+        <projectService serviceImplementation="com.itangcent.easyapi.core.standalone.StandaloneExportService"/>
         <projectService serviceImplementation="com.itangcent.easyapi.channel.spi.ChannelRegistry"/>
         <projectService serviceImplementation="com.itangcent.easyapi.framework.spi.FrameworkRegistry"/>
         <!-- register EnvironmentSyncSupport SPI → Postman impl.

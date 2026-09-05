@@ -1,6 +1,6 @@
 package com.itangcent.easyapi.channel.postman
 
-import com.itangcent.easyapi.core.export.ExportMetadata
+import com.itangcent.easyapi.headless.core.export.ExportMetadata
 import com.itangcent.easyapi.channel.postman.model.PostmanCollection
 import com.itangcent.easyapi.core.util.text.append
 

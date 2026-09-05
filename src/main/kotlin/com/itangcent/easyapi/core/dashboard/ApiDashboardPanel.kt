@@ -27,7 +27,7 @@ import com.itangcent.easyapi.channel.spi.ChannelConfig
 import com.itangcent.easyapi.channel.spi.ChannelRegistry
 import com.itangcent.easyapi.channel.spi.CurlRenderer
 import com.itangcent.easyapi.core.export.ApiEndpoint
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.export.path
 import com.itangcent.easyapi.core.ide.dialog.EndpointSelection
 import com.itangcent.easyapi.core.ide.dialog.ExportDialog

@@ -1,5 +1,6 @@
 package com.itangcent.easyapi.core.ide.action
 
+import com.itangcent.easyapi.core.internal.RuntimeMode
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
 import com.itangcent.easyapi.format.spi.FieldFormatActionGroup
@@ -10,6 +11,7 @@ import com.itangcent.easyapi.format.spi.FieldFormatActionGroup
  */
 class ChannelActionInitActivity : ProjectActivity {
     override suspend fun execute(project: Project) {
+        if (RuntimeMode.isHeadless) return
         ChannelQuickActionGroup.ensureActionsRegistered(project)
         FieldFormatActionGroup.ensureActionsRegistered(project)
     }

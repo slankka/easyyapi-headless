@@ -25,7 +25,7 @@ import com.itangcent.easyapi.channel.markdown.template.TemplateConfig
 import com.itangcent.easyapi.channel.markdown.template.TemplateModelBuilder
 import com.itangcent.easyapi.core.http.HttpClientProvider
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.ide.support.NotificationUtils
 import com.itangcent.easyapi.core.logging.IdeaLog
 import com.itangcent.easyapi.core.settings.Settings

@@ -27,7 +27,7 @@ import com.itangcent.easyapi.core.export.GrpcMetadata
 import com.itangcent.easyapi.core.export.GrpcStreamingType
 import com.itangcent.easyapi.core.export.HttpMetadata
 import com.itangcent.easyapi.core.export.HttpMethod
-import com.itangcent.easyapi.core.export.MutableExtension
+import com.itangcent.easyapi.headless.core.export.MutableExtension
 import com.itangcent.easyapi.core.export.ParameterBinding
 import com.itangcent.easyapi.core.export.ParameterType
 import com.itangcent.easyapi.core.http.*
@@ -814,7 +814,7 @@ class EndpointDetailsPanel(
             hostComboBox.selectedIndex = 0
         }
 
-        bodyArea.text = cache.body ?: meta.body?.let { it.toJson() } ?: ""
+        bodyArea.text = RequestBodyCacheMerger.merge(cache.body, meta.body?.let { it.toJson() }) ?: ""
     }
 
     private fun loadGrpcFromEndpoint(meta: GrpcMetadata) {
@@ -976,7 +976,7 @@ class EndpointDetailsPanel(
         endpointContentType = cache.contentType ?: contentType
 
         bodyArea.text = if (!isFormData) {
-            cache.body ?: meta?.body?.let { it.toJson() } ?: ""
+            RequestBodyCacheMerger.merge(cache.body, meta?.body?.let { it.toJson() }) ?: ""
         } else ""
 
         rebuildTabs(hasPathParams = pathParams.isNotEmpty(), hasFormParams = isFormData)

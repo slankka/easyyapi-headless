@@ -2,6 +2,7 @@ package com.itangcent.easyapi.channel.hoppscotch
 
 import com.itangcent.easyapi.channel.hoppscotch.model.*
 import com.itangcent.easyapi.core.export.*
+import com.itangcent.easyapi.headless.core.export.*
 import com.itangcent.easyapi.core.psi.model.ObjectModel
 import org.junit.Assert.*
 import org.junit.Test

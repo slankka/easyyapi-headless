@@ -3,7 +3,7 @@ package com.itangcent.easyapi.channel.spi
 import com.intellij.openapi.project.Project
 import com.itangcent.easyapi.core.export.ApiEndpoint
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.export.isGrpc
 import com.itangcent.easyapi.core.export.isHttp
 import com.itangcent.easyapi.core.rule.RuleKey

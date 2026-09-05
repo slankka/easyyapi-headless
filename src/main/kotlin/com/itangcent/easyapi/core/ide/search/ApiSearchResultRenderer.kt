@@ -86,8 +86,9 @@ class ApiSearchResultRenderer : ListCellRenderer<ApiEndpoint> {
             isOpaque = false
         }
 
-        if (!value.className.isNullOrBlank()) {
-            val classLabel = JBLabel(value.className).apply {
+        val className = value.className?.takeIf { it.isNotBlank() }
+        if (className != null) {
+            val classLabel = JBLabel(className).apply {
                 foreground = JBColor.GRAY
                 font = font.deriveFont(font.size2D - 1)
             }

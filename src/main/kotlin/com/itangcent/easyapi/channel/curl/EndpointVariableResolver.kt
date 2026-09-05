@@ -5,7 +5,7 @@ import com.itangcent.easyapi.core.config.DOLLAR_BRACE_PATTERN
 import com.itangcent.easyapi.core.export.ApiEndpoint
 import com.itangcent.easyapi.core.export.GrpcMetadata
 import com.itangcent.easyapi.core.export.HttpMetadata
-import com.itangcent.easyapi.core.export.MutableExtension
+import com.itangcent.easyapi.headless.core.export.MutableExtension
 import com.itangcent.easyapi.format.json.ObjectModelJsonConverter
 
 /**

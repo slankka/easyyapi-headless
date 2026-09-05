@@ -7,11 +7,13 @@ import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileWrapper
 import com.itangcent.easyapi.channel.spi.Channel
+import com.itangcent.easyapi.channel.spi.HeadlessChannel
+import com.itangcent.easyapi.channel.spi.HeadlessExport
 import com.itangcent.easyapi.channel.spi.ChannelConfig
 import com.itangcent.easyapi.channel.spi.ChannelOptionsPanel
 import com.itangcent.easyapi.core.export.ApiEndpoint
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.export.isHttp
 import com.itangcent.easyapi.core.internal.threading.background
 import com.itangcent.easyapi.core.internal.threading.swing
@@ -83,7 +85,18 @@ import kotlin.reflect.KClass
  * @see OpenApiSettingsPanel for the persistent settings tab
  * @see OpenApiEnvelope for the rule-resolved envelope data carrier
  */
-class OpenApiChannel : Channel, IdeaLog {
+class OpenApiChannel : Channel, IdeaLog, HeadlessChannel {
+    override suspend fun exportHeadless(context: ExportContext, format: String): HeadlessExport {
+        val outputFormat = when (format) {
+            "json" -> OpenApiOutputFormat.JSON
+            "yaml" -> OpenApiOutputFormat.YAML
+            else -> return HeadlessExport(ExportResult.Error("Unsupported OpenAPI format: $format"))
+        }
+        val result = export(context.copy(channelConfig = OpenApiConfig(outputFormat)))
+        val content = ((result as? ExportResult.Success)?.metadata as? OpenApiExportMetadata)?.content
+        return HeadlessExport(result, content)
+    }
+
 
     override val id: String = "openapi"
     override val displayName: String = "OpenAPI (Beta)"

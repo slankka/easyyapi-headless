@@ -1,11 +1,12 @@
 package com.itangcent.easyapi.channel.yapi
 
+import com.itangcent.easyapi.core.internal.RuntimeMode
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
 import com.itangcent.easyapi.core.internal.threading.read
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportMetadata
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportMetadata
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.export.path
 import com.itangcent.easyapi.core.logging.IdeaLog
 import com.itangcent.easyapi.core.logging.console
@@ -30,6 +31,10 @@ class YapiExporter(private val project: Project) : IdeaLog {
 
     suspend fun export(context: ExportContext, selectedToken: String? = null): ExportResult {
         LOG.info("YapiExporter.export: start. endpoints=${context.endpointsToExport.size}")
+        if (RuntimeMode.isHeadless &&
+            project.settings<YapiSettings>().yapiExportMode == YapiExportMode.ALWAYS_ASK.name) {
+            return ExportResult.Error("YApi ALWAYS_ASK mode is unavailable in headless exports; configure a noninteractive update mode")
+        }
         val clientProvider = DefaultYapiApiClientProvider(project)
         runCatching { clientProvider.init() }
             .onFailure {

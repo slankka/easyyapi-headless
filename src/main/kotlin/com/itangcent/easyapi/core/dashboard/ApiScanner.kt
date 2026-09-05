@@ -25,6 +25,7 @@ import com.itangcent.easyapi.core.logging.console
 import com.itangcent.easyapi.core.psi.type.areMethodsRelated
 import com.itangcent.easyapi.core.settings.module.GeneralSettings
 import com.itangcent.easyapi.core.settings.settings
+import com.itangcent.easyapi.core.scan.ApiEndpointScanner
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
@@ -64,7 +65,7 @@ import kotlin.time.Duration.Companion.milliseconds
  * @see ClassExporter for endpoint extraction
  */
 @Service(Service.Level.PROJECT)
-class ApiScanner(private val project: Project) {
+class ApiScanner(private val project: Project) : ApiEndpointScanner {
 
     companion object : IdeaLog {
         /**
@@ -91,7 +92,7 @@ class ApiScanner(private val project: Project) {
      *
      * @return List of all discovered API endpoints
      */
-    suspend fun scanAll(): List<ApiEndpoint> {
+    override suspend fun scanAll(): List<ApiEndpoint> {
         DumbModeHelper.waitForSmartMode(project)
         LOG.info("Starting API scan...")
         val endpoints = runWithProgress(project, "Scanning API endpoints...") { indicator ->
@@ -115,9 +116,9 @@ class ApiScanner(private val project: Project) {
      * @param indicator Optional progress indicator from the caller
      * @return Sequence of discovered API endpoints
      */
-    suspend fun scanClasses(
+    override suspend fun scanClasses(
         classes: List<PsiClass>,
-        indicator: ProgressIndicator? = null
+        indicator: ProgressIndicator?
     ): Sequence<ApiEndpoint> {
         LOG.info("scanClasses called with ${classes.size} classes")
         DumbModeHelper.waitForSmartMode(project)
@@ -132,6 +133,12 @@ class ApiScanner(private val project: Project) {
         }
         return endpoints.asSequence()
     }
+
+    /**
+     * Compatibility overload for callers using the concrete IDEA service.
+     */
+    suspend fun scanClasses(classes: List<PsiClass>): Sequence<ApiEndpoint> =
+        scanClasses(classes, null)
 
     /**
      * Scans the current [selection] for API endpoints, respecting method-level

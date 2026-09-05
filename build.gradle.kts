@@ -9,6 +9,12 @@ plugins {
 group = "com.itangcent"
 version = "3.2.3.252.0"
 
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
 changelog {
     val v = project.version.toString()
     // version is like "3.1.5.252.0", changelog uses semver "3.1.5"
@@ -23,6 +29,8 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":headless-core"))
+
     intellijPlatform {
         intellijIdeaCommunity("2025.2.1")
         bundledPlugins(
@@ -183,6 +191,22 @@ intellijPlatform {
 
     buildSearchableOptions = false
     sandboxContainer = layout.projectDirectory.dir("idea-sandbox")
+}
+
+// Version-pinned Java/Maven runtime. Python is used only while assembling the distribution.
+tasks.register<Exec>("packageStandalone") {
+    group = "distribution"
+    description = "Packages the standalone Java/Maven CLI with its Platform runtime and JBR"
+    dependsOn("buildPlugin", ":headless-cli:buildPlugin")
+    doFirst {
+        val platform = tasks.named<org.jetbrains.intellij.platform.gradle.tasks.RunIdeTask>("runIde").get().platformPath
+        val plugin = tasks.named<org.jetbrains.intellij.platform.gradle.tasks.BuildPluginTask>("buildPlugin").get().archiveFile.get().asFile
+        val headlessCliPlugin = layout.projectDirectory.file("headless-cli/build/distributions/headless-cli.zip").asFile
+        val destination = providers.gradleProperty("standaloneOutput")
+            .getOrElse(layout.buildDirectory.dir("standalone/easyyapi").get().asFile.absolutePath)
+        commandLine("python3", "script/package-standalone.py", "--platform", platform.toString(),
+            "--plugin", plugin.absolutePath, "--plugin", headlessCliPlugin.absolutePath, "--output", destination)
+    }
 }
 
 kover {

@@ -2,6 +2,7 @@ package com.itangcent.easyapi.channel.yapi
 
 import com.google.gson.JsonParser
 import com.itangcent.easyapi.core.export.*
+import com.itangcent.easyapi.headless.core.export.*
 import com.itangcent.easyapi.channel.yapi.model.*
 import com.itangcent.easyapi.core.psi.model.FieldModel
 import com.itangcent.easyapi.core.psi.model.ObjectModel

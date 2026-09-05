@@ -2,7 +2,7 @@ package com.itangcent.easyapi.channel.postman
 
 import com.itangcent.easyapi.channel.spi.ChannelConfig
 import com.itangcent.easyapi.core.export.ExportContext
-import com.itangcent.easyapi.core.export.ExportResult
+import com.itangcent.easyapi.headless.core.export.ExportResult
 import com.itangcent.easyapi.core.export.HttpMetadata
 import com.itangcent.easyapi.core.export.ApiEndpoint
 import com.itangcent.easyapi.core.export.HttpMethod

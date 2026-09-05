@@ -1,11 +1,13 @@
 .gradle/
+.agents/
 build/
+idea-sandbox/
+CLAUDE.md
 .idea/
 .kotlin/
 *.jar
 !gradle/wrapper/gradle-wrapper.jar
 *.log
-idea-sandbox/
 bin/
 /.spec
 /plugin
