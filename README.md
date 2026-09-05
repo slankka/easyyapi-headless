@@ -13,6 +13,44 @@ English | [中文](README_CN.md)
 
 An IntelliJ IDEA plugin for API development — export API documentation to YApi/Postman/Markdown, send requests, and manage endpoints directly from your code.
 
+## Headless Mode
+
+EasyYapi also provides a container-friendly Headless CLI for CI/CD pipelines.
+It reuses the existing PSI, Maven, Spring MVC, rule, and export pipeline without
+opening an IDEA window. The current supported scope is Java + Maven + Spring MVC,
+with YApi and OpenAPI export plus a self-contained static API Preview.
+
+The repository is split into three boundaries:
+
+| Module | Responsibility |
+|--------|----------------|
+| `headless-core` | Shared API models, export/rule contracts, PSI/type infrastructure, and Preview models |
+| `headless-cli` | IntelliJ headless bootstrap, Maven project loading, export commands, and static Preview rendering |
+| `idea-plugin` | IDEA Settings, Dashboard, actions, and the provider implementation used by both IDE and Headless flows |
+
+### Build and run the Headless CLI
+
+```bash
+# Build a standalone distribution
+./gradlew packageStandalone
+
+# Preview all APIs in a Maven multi-module project
+build/standalone/easyyapi/bin/easyyapi \
+  --project /absolute/path/to/project \
+  --jdk /absolute/path/to/jdk \
+  --mode preview \
+  --output /absolute/path/to/preview
+```
+
+The generated Preview is a static `index.html` with hierarchical API navigation,
+search by endpoint name, HTTP method, or URL, and request/response examples. It can
+be published directly as a CI artifact or static site. Use `--offline` when the
+required Maven dependencies are already available in the local repository, or
+`--maven-settings` to select a Maven/Nexus configuration.
+
+For the complete CLI options, YApi settings import, container usage, and smoke test,
+see [`docs/developer/standalone.md`](docs/developer/standalone.md).
+
 ## Features
 
 ### API Export
